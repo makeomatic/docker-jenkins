@@ -10,8 +10,8 @@ fi
 
 # allow the container to be started with `--user`
 if [ "$1" = 'java' -a "$(id -u)" = '0' ]; then
-	chown -R $JENKINS_USER:$JENKINS_GROUP $JENKINS_VOL $JENKINS_HOME
-	exec su-exec $JENKINS_USER "$0" "$@"
+	chown -R ${JENKINS_USER}:${JENKINS_GROUP} ${JENKINS_HOME}
+	exec su-exec ${JENKINS_USER} "$0" "$@"
 fi
 
 exec "$@"
