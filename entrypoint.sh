@@ -6,10 +6,10 @@ set -eo pipefail
 [[ -n "$DEBUG" ]] && set -x
 
 # default location
-JENKINS_WAR=${JENKINS_WAR:-"${JENKINS_HOME}/jenkins.war"}
+JENKINS_WAR=${JENKINS_WAR:-"${JENKINS_HOME}/jenkins-${JENKINS_VERSION}.war"}
 
 if [ ! -f "$JENKINS_WAR" ]; then
-	curl -sSL http://mirrors.jenkins-ci.org/war/${JENKINS_VERSION}/jenkins.war --output "$JENKINS_WAR"
+	curl -sSL http://mirrors.jenkins-ci.org/war/${JENKINS_VERSION}/jenkins-${JENKINS_VERSION}.war --output "$JENKINS_WAR"
 fi
 
 for plugins in ${JENKINS_PLUGINS}
