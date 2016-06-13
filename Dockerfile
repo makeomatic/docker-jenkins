@@ -27,4 +27,4 @@ EXPOSE 8080 50000
 
 COPY entrypoint.sh /usr/local/bin/docker-entrypoint.sh
 ENTRYPOINT ["/usr/local/bin/docker-entrypoint.sh"]
-CMD ["java", "-jar", "/opt/jenkins/jenkins.war"]
+CMD ["java", "-jar", "/opt/jenkins/jenkins-${JENKINS_VERSION}.war"]
