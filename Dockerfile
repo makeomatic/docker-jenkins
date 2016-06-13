@@ -3,7 +3,7 @@
 FROM cgswong/java:orajre8
 
 # Setup environment
-ENV JENKINS_VERSION=1.653 \
+ENV JENKINS_VERSION=2.8 \
     JENKINS_USER=jenkins \
     JENKINS_GROUP=jenkins \
     JENKINS_HOME=/opt/jenkins \
