@@ -2,6 +2,9 @@
 
 set -eo pipefail
 
+# set the DEBUG env variable to turn on debugging
+[[ -n "$DEBUG" ]] && set -x
+
 # first arg is `-f` or `--some-option`
 # or first arg is `something.conf`
 if [ "${1#-}" != "$1" ]; then
