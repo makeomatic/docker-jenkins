@@ -26,6 +26,11 @@ if [ "${1#-}" != "$1" ]; then
 	set -- java -jar "$JENKINS_WAR" "$@"
 fi
 
+if [[ -n "$DOCKER_GID" -a "$(id -u)" = '0' ]]; then
+	addgroup -g "${DOCKER_GID}" docker
+	addgroup -S "${JENKINS_USER}" docker
+fi
+
 # allow the container to be started with `--user`
 if [ "$1" = 'java' -a "$(id -u)" = '0' ]; then
 	chown -R ${JENKINS_USER}:${JENKINS_GROUP} ${JENKINS_HOME}
