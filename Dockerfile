@@ -19,6 +19,12 @@ RUN \
     && apk add 'su-exec>=0.2' \
     && rm -rf /var/cache/apk/*
 
+# this is what we want jenkins to run with
+RUN apk --no-cache add --virtual .runDeps \
+  git \
+  openssl \
+  ca-certificates
+
 # Expose volumes
 VOLUME ["${JENKINS_HOME}"]
 
