@@ -26,9 +26,9 @@ if [ "${1#-}" != "$1" ]; then
 	set -- java -jar "$JENKINS_WAR" "$@"
 fi
 
-if [[ -n "$DOCKER_GID" -a "$(id -u)" = '0' ]]; then
+if [ -n "$DOCKER_GID" -a "$(id -u)" = '0' ]; then
 	existing_group=$(cat /etc/group | grep "${DOCKER_GID}" | awk -F: '{print $1}')
-	if [[ -n "$existing_group" ]]; then
+	if [ -n "$existing_group" ]; then
 		addgroup -S "${JENKINS_USER}" "$existing_group"
 	else
 		addgroup -g "${DOCKER_GID}" docker
