@@ -1,6 +1,6 @@
 #!/bin/sh
 
-set -eo pipefail
+set -e
 
 # set the DEBUG env variable to turn on debugging
 [[ -n "$DEBUG" ]] && set -x
@@ -27,15 +27,11 @@ if [ "${1#-}" != "$1" ]; then
 fi
 
 if [ -n "$DOCKER_GID" -a "$(id -u)" = '0' ]; then
-	existing_group=$(cat /etc/group | grep "${DOCKER_GID}" | awk -F: '{print $1}')
-	echo "DOCKER_GID defined, checked groups, found: ${existing_group}";
+	existing_group="$(cat /etc/group | grep "${DOCKER_GID}" | awk -F: '{print $1}')"
 	if [ -n "$existing_group" ]; then
-		echo "adding ${JENKINS_USER} to ${existing_group}"
 		addgroup -S "${JENKINS_USER}" "${existing_group}"
 	else
-		echo "creating group docker with gid ${DOCKER_GID}"
 		addgroup -g "${DOCKER_GID}" docker
-		echo "adding ${JENKINS_USER} to group docker"
 		addgroup -S "${JENKINS_USER}" docker
 	fi
 fi
