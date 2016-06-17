@@ -27,7 +27,7 @@ if [ "${1#-}" != "$1" ]; then
 fi
 
 if [[ -n "$DOCKER_GID" -a "$(id -u)" = '0' ]]; then
-	existing_group=$(cat /etc/group | grep 999 | awk -F: '{print $1}')
+	existing_group=$(cat /etc/group | grep "${DOCKER_GID}" | awk -F: '{print $1}')
 	if [[ -n "$existing_group" ]]; then
 		addgroup -S "${JENKINS_USER}" "$existing_group"
 	else
