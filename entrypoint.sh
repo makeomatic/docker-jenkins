@@ -28,10 +28,14 @@ fi
 
 if [ -n "$DOCKER_GID" -a "$(id -u)" = '0' ]; then
 	existing_group=$(cat /etc/group | grep "${DOCKER_GID}" | awk -F: '{print $1}')
+	echo "DOCKER_GID defined, checked groups, found: ${existing_group}";
 	if [ -n "$existing_group" ]; then
-		addgroup -S "${JENKINS_USER}" "$existing_group"
+		echo "adding ${JENKINS_USER} to ${existing_group}"
+		addgroup -S "${JENKINS_USER}" "${existing_group}"
 	else
+		echo "creating group docker with gid ${DOCKER_GID}"
 		addgroup -g "${DOCKER_GID}" docker
+		echo "adding ${JENKINS_USER} to group docker"
 		addgroup -S "${JENKINS_USER}" docker
 	fi
 fi
