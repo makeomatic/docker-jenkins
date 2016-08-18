@@ -1,9 +1,9 @@
 # Docker file to create Jenkins container.
 
-FROM cgswong/java:orajre8
+FROM cgswong/java:orajdk8
 
 # Setup environment
-ENV JENKINS_VERSION=2.8 \
+ENV JENKINS_VERSION=1.658 \
     JENKINS_USER=jenkins \
     JENKINS_GROUP=jenkins \
     JENKINS_HOME=/opt/jenkins \
