@@ -12,6 +12,7 @@ ENV JENKINS_VERSION=1.658 \
 # # Install software
 RUN \
     apk --update upgrade \
+    && apk add openssh-client \
     && mkdir -p ${JENKINS_HOME} ${JENKINS_HOME}/plugins ${JAVA_BASE} \
     && addgroup ${JENKINS_GROUP} \
     && adduser -h ${JENKINS_HOME} -D -s /bin/bash -G ${JENKINS_GROUP} ${JENKINS_USER} \
